@@ -20,7 +20,7 @@ open CamelCase
 
 let safeDiv a = function
   | 0 -> None
-  | b -> a / b
+  | b -> Some a / b
 
 let () = run [
         test "test if 2 + 2 = 4" (fun () -> IntValue.expect_equals 4 (2 + 2));
