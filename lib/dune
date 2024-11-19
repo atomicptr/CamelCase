@@ -1,0 +1,3 @@
+(library
+ (name CamelCase)
+ (public_name CamelCase))
