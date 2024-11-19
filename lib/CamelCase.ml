@@ -6,3 +6,9 @@ module IntValue = Values.MakeComparableValue (Values.IntComparable)
 
 module StringValue = Values.MakeComparableValue (Values.StringComparable)
 (** Provides expect_* functions for strings *)
+
+module FloatValue = Values.MakeComparableValue (Values.FloatComparable)
+(** Provides expect_* functions for floats *)
+
+module CharValue = Values.MakeComparableValue (Values.CharComparable)
+(** Provides expect_* functions for chars *)

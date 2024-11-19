@@ -19,6 +19,20 @@ module StringComparable : ComparableValue with type t = string = struct
   let to_string s = s
 end
 
+module FloatComparable : ComparableValue with type t = float = struct
+  type t = float
+
+  let compare = compare
+  let to_string = string_of_float
+end
+
+module CharComparable : ComparableValue with type t = char = struct
+  type t = char
+
+  let compare = compare
+  let to_string = String.make 1
+end
+
 let check_result check error_msg = if check then TestResult.Success else TestResult.Failure error_msg
 
 module MakeComparableValue (T : ComparableValue) = struct
