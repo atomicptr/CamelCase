@@ -5,7 +5,7 @@ let expect_failure = function
   | Failure _ -> Success
 
 let () =
-  run
+  run ~title:__FILE__
     [
       test "simple: expect true works" (fun () -> expect_true true);
       test "simple: expect false works" (fun () -> expect_false false);

@@ -1,18 +1,26 @@
 (** Returns a test case with a name *)
 let test name f = (name, f)
 
-(** Run all tests *)
-let run ?(print_func = Printer.print_test_results) tests =
+(** Run all tests and terminate the program with exit code 0 if all tests were successful or 1 if they weren't *)
+let run ?(title = "") tests =
+  Printer.print_head ~title ();
   let rec inner = function
     | [] -> []
-    | (name, func) :: rest -> (
+    | (name, func) :: rest ->
         let res = func () in
-        match res with
-        | TestResult.Success -> (name, res) :: inner rest
-        (* abort on failure *)
-        | TestResult.Failure _ -> [ (name, res) ])
+        (name, res) :: inner rest
   in
-  inner tests |> print_func
+  let results = inner tests in
+  Printer.print_test_results results;
+  match
+    List.find_opt
+      (function
+        | _, TestResult.Failure _ -> true
+        | _, _ -> false)
+      results
+  with
+  | Some _ -> exit 1
+  | None -> exit 0
 
 (** Expect input to be true *)
 let expect_true input = if input then TestResult.Success else TestResult.Failure "expected true, but got false"
