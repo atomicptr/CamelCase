@@ -16,7 +16,7 @@ let print_test_results results =
     | name, TestResult.Success -> print_endline (bold "test" ^ " " ^ name ^ "... " ^ green "ok")
     | name, TestResult.Failure reason ->
         print_endline (bold "test" ^ " " ^ name ^ "... " ^ red "error");
-        print_endline (red (indent reason "\t"))
+        print_endline (indent reason "\t")
   in
   let successes, failures =
     List.partition
