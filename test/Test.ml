@@ -22,4 +22,11 @@ let () =
       test "expect: 4 <= 4" (fun () -> IntValue.expect_smaller_or_equal 4 4);
       test "expect: 5 > 1" (fun () -> IntValue.expect_bigger 1 5);
       test "expect: 5 >= 5" (fun () -> IntValue.expect_bigger_or_equal 5 5);
+      test "expect: expect_equals with input wrapped in Option" (fun () ->
+          IntValue.expect_option_equals (2 + 2) (Some 4));
+      test "expect: expect_not_equals with input wrapped in Option" (fun () ->
+          IntValue.expect_option_not_equals (2 + 2) (Some 5));
+      test "expect: expect_equals with input wrapped in Result" (fun () -> IntValue.expect_result_equals (2 + 2) (Ok 4));
+      test "expect: expect_not_equals with input wrapped in Result" (fun () ->
+          IntValue.expect_result_not_equals (2 + 2) (Ok 5));
     ]

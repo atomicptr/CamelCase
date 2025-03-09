@@ -40,9 +40,29 @@ module MakeComparableValue (T : ComparableValue) = struct
   let expect_equals expected input =
     check_result (T.compare input expected = 0) ("expected: " ^ T.to_string input ^ " to be: " ^ T.to_string expected)
 
+  (** Asserts that the option input has a value and that these two values for the given type are equal *)
+  let expect_option_equals expected input =
+    let open TestRunner in
+    expect_some input >> expect_equals expected (Option.get input)
+
+  (** Asserts that the result input has a value and that these two values for the given type are equal *)
+  let expect_result_equals expected input =
+    let open TestRunner in
+    expect_ok input >> expect_equals expected (Result.get_ok input)
+
   (** Asserts that two values aren't equal *)
   let expect_not_equals expected input =
     check_result (T.compare input expected != 0) ("expected: " ^ T.to_string input ^ " to be: " ^ T.to_string expected)
+
+  (** Asserts that the option input has a value and that these two values for the given type are equal *)
+  let expect_option_not_equals expected input =
+    let open TestRunner in
+    expect_some input >> expect_not_equals expected (Option.get input)
+
+  (** Asserts that the option input has a value and that these two values for the given type are equal *)
+  let expect_result_not_equals expected input =
+    let open TestRunner in
+    expect_ok input >> expect_not_equals expected (Result.get_ok input)
 
   (** Asserts that expected input to be smaller than expected *)
   let expect_smaller expected input =
