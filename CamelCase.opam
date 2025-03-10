@@ -10,8 +10,8 @@ homepage: "https://github.com/atomicptr/CamelCase"
 doc: "https://github.com/atomicptr/CamelCase"
 bug-reports: "https://github.com/atomicptr/CamelCase/issues"
 depends: [
-  "ocaml"
   "dune" {>= "3.17"}
+  "ocaml" {>= "5.0"}
   "ocamlformat"
   "odoc" {with-doc}
 ]

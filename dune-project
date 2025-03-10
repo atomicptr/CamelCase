@@ -19,7 +19,10 @@
  (name CamelCase)
  (synopsis "A simple OCaml test framework")
  (description "A simple OCaml test framework")
- (depends ocaml dune ocamlformat)
+ (depends
+  (ocaml
+   (>= 5.0))
+  ocamlformat)
  (tags
   ("tests" "test" "unit" "unit tests")))
 
