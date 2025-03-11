@@ -4,12 +4,24 @@ A simple OCaml test framework
 
 ## Install
 
+### Opam (recommended)
+
+Opam Url: https://opam.ocaml.org/packages/CamelCase/
+
+```scheme
+(package
+    (name my_package)
+    (depends CamelCase))
+```
+
+### Pin the package in dune
+
 ```scheme
 (package
     (name my_package)
     (depends CamelCase))
 
-; The package is not available on OPAM yet:
+; add this line to your dune-project
 (pin (package (name CamelCase)) (url "git+https://github.com/atomicptr/CamelCase"))
 ```
 
