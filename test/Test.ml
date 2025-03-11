@@ -1,9 +1,5 @@
 open CamelCase
 
-let expect_failure = function
-  | Success -> Failure "expected failure got success"
-  | Failure _ -> Success
-
 let () =
   run ~title:__FILE__
     [
@@ -26,9 +22,13 @@ let () =
           IntValue.expect_option_equals (2 + 2) (Some 4));
       test "expect: expect_not_equals with input wrapped in Option" (fun () ->
           IntValue.expect_option_not_equals (2 + 2) (Some 5));
+      test "expect: expect_equals with input wrapped in Option but its none" (fun () ->
+          expect_failure @@ IntValue.expect_option_equals 4 None);
       test "expect: expect_equals with input wrapped in Result" (fun () -> IntValue.expect_result_equals (2 + 2) (Ok 4));
       test "expect: expect_not_equals with input wrapped in Result" (fun () ->
           IntValue.expect_result_not_equals (2 + 2) (Ok 5));
+      test "expect: expect_equals with input wrapped in Result but its Error" (fun () ->
+          expect_failure @@ IntValue.expect_result_equals 4 (Error "Something went wrong"));
       test "expect: every assumption in a list to be true" (fun () ->
           expect_every
             (List.init 10 (fun i -> i)

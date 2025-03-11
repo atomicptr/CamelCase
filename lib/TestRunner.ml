@@ -22,6 +22,11 @@ let run ?(title = "") tests =
   | Some _ -> exit 1
   | None -> exit 0
 
+(** Expect TestResult to Fail *)
+let expect_failure = function
+  | TestResult.Success -> TestResult.Failure "expected failure got success"
+  | TestResult.Failure _ -> TestResult.Success
+
 (** Expect input to be true *)
 let expect_true input = if input then TestResult.Success else TestResult.Failure "expected true, but got false"
 

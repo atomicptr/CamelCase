@@ -42,13 +42,15 @@ module MakeComparableValue (T : ComparableValue) = struct
 
   (** Asserts that the option input has a value and that these two values for the given type are equal *)
   let expect_option_equals expected input =
-    let open TestRunner in
-    expect_some input >> expect_equals expected (Option.get input)
+    match input with
+    | Some input -> expect_equals expected input
+    | None -> TestResult.Failure ("expected: None to be: " ^ T.to_string expected)
 
   (** Asserts that the result input has a value and that these two values for the given type are equal *)
   let expect_result_equals expected input =
-    let open TestRunner in
-    expect_ok input >> expect_equals expected (Result.get_ok input)
+    match input with
+    | Ok input -> expect_equals expected input
+    | Error _ -> TestResult.Failure ("expected: Error (...) to be: " ^ T.to_string expected)
 
   (** Asserts that two values aren't equal *)
   let expect_not_equals expected input =
@@ -56,13 +58,15 @@ module MakeComparableValue (T : ComparableValue) = struct
 
   (** Asserts that the option input has a value and that these two values for the given type are equal *)
   let expect_option_not_equals expected input =
-    let open TestRunner in
-    expect_some input >> expect_not_equals expected (Option.get input)
+    match input with
+    | Some input -> expect_not_equals expected input
+    | None -> TestResult.Failure ("expected: None to be: " ^ T.to_string expected)
 
   (** Asserts that the option input has a value and that these two values for the given type are equal *)
   let expect_result_not_equals expected input =
-    let open TestRunner in
-    expect_ok input >> expect_not_equals expected (Result.get_ok input)
+    match input with
+    | Ok input -> expect_not_equals expected input
+    | Error _ -> TestResult.Failure ("expected: Error (...) to be: " ^ T.to_string expected)
 
   (** Asserts that expected input to be smaller than expected *)
   let expect_smaller expected input =
