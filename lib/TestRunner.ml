@@ -49,3 +49,6 @@ let ( >> ) a b =
   match a with
   | TestResult.Success -> b
   | TestResult.Failure _ -> a
+
+(** Evaluate a list of results *)
+let expect_every = List.fold_left (fun acc res -> acc >> res) TestResult.Success

@@ -29,4 +29,9 @@ let () =
       test "expect: expect_equals with input wrapped in Result" (fun () -> IntValue.expect_result_equals (2 + 2) (Ok 4));
       test "expect: expect_not_equals with input wrapped in Result" (fun () ->
           IntValue.expect_result_not_equals (2 + 2) (Ok 5));
+      test "expect: every assumption in a list to be true" (fun () ->
+          expect_every
+            (List.init 10 (fun i -> i)
+            |> List.filter (fun i -> i mod 2 = 0)
+            |> List.map (fun i -> expect_true (i mod 2 = 0))));
     ]
