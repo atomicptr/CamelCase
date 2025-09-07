@@ -21,9 +21,6 @@
  (description "A simple OCaml test framework")
  (depends
   (ocaml
-   (>= 5.0))
-  ocamlformat)
+   (>= 5.0)))
  (tags
   ("tests" "test" "unit" "unit tests")))
-
-; See the complete stanza docs at https://dune.readthedocs.io/en/stable/reference/dune-project/index.html

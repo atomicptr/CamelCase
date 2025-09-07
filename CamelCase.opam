@@ -12,7 +12,6 @@ bug-reports: "https://github.com/atomicptr/CamelCase/issues"
 depends: [
   "dune" {>= "3.17"}
   "ocaml" {>= "5.0"}
-  "ocamlformat"
   "odoc" {with-doc}
 ]
 build: [
