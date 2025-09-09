@@ -2,7 +2,7 @@
 let test name f = (name, f)
 
 (** Run all tests and terminate the program with exit code 0 if all tests were successful or 1 if they weren't *)
-let run ?(title = "") tests =
+let run ?(title = "") ?(success_func = (fun () -> exit 0)) ?(failure_func = (fun () -> exit 1)) tests =
   Printer.print_head ~title ();
   let rec inner = function
     | [] -> []
@@ -19,8 +19,8 @@ let run ?(title = "") tests =
         | _, _ -> false)
       results
   with
-  | Some _ -> exit 1
-  | None -> exit 0
+  | Some _ -> failure_func ()
+  | None -> success_func ()
 
 (** Expect TestResult to Fail *)
 let expect_failure = function
